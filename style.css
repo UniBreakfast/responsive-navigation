@@ -1,0 +1,135 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 2vmax calc(max((100vw - 1000px) / 2, 3vmax));
+}
+
+ul {
+  list-style: none;
+}
+
+[for="burger"] {
+  width: 4vmax;
+  height: 4vmax;
+  background: #000;
+  box-shadow: 0 0 5vmax 5vmax #fff;
+  top: 4vmax;
+  right: 4vmax;
+  position: fixed;
+
+  &::before, &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0.8vmax;
+    width: 100%;
+    height: 0.8vmax;
+    background: #fff;
+    transition: 300ms;
+  }
+
+  &::after {
+    top: 2.4vmax;
+  }
+
+  :checked+& {
+    &::before {
+      transform: rotate(45deg);
+      top: 1.6vmax;
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+      top: 1.6vmax;
+    }
+  }
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    nav {
+      background: #fff;
+      position: fixed;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      transform: translateY(-50%);
+      box-shadow: 0 0 15vmax 15vmax #fff;
+
+      ul {
+        flex-direction: column;
+        gap: 2vmax;
+        text-align: center;
+      }
+    }
+
+    [for="burger"]:hover+nav {
+      transition: 400ms;
+    }
+  }
+
+  ul {
+    display: flex;
+    gap: 4vw;
+    align-items: center;
+  }
+}
+
+#burger:not(:checked)~nav {
+  @media (max-width: 768px) {
+    /* display: none; */
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+main {
+  display: grid;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 200px auto;
+  }
+
+  h2 {
+    text-align: center;
+  }
+}
+
+aside {
+  grid-row: span 5;
+
+  nav {
+    position: sticky;
+    top: 100px;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      padding: 6vh 3vh;
+      gap: 2vh;
+    }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4vw;
+  margin-top: 2vmax;
+}
